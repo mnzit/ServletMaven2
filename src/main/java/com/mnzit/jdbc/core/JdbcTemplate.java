@@ -18,19 +18,35 @@ import java.util.List;
  * @param <T>
  */
 public class JdbcTemplate<T> {
-    public List<T> query(String sql,RowMapper<T> mapper)throws Exception{
+
+    private DbConnection db = new DbConnection();
+
+    public List<T> query(String sql, RowMapper<T> mapper) throws Exception {
         List<T> rows = new ArrayList<T>();
-        Class.forName("org.postgresql.Driver");
-            String url = "jdbc:postgresql://ec2-50-17-203-51.compute-1.amazonaws.com/d3hlap1pms3oe8?sslmode=require";
-            String user = "qvecbsrmncwsze";
-            String password = "2560942acfed92fdfa5adebb7b9a3ca519309ec8418d71ed81dc1f17fd3264eb";
-            Connection conn = DriverManager.getConnection(url, user, password);
-            PreparedStatement stmt = conn.prepareStatement(sql);
-            ResultSet rs = stmt.executeQuery();
-            while(rs.next()){
-                rows.add(mapper.mapRow(rs));
-            }
-            conn.close();
-            return rows;
+        db.connect();
+        db.init(sql);
+        ResultSet rs = db.executeQuery();
+        while (rs.next()) {
+            rows.add(mapper.mapRow(rs));
+        }
+        db.close();
+        return rows;
+    }
+
+    public T queryByObject(String sql, Object[] params, RowMapper<T> mapper) throws Exception {
+        T row = null;
+        db.connect();
+        PreparedStatement stmt = db.init(sql);
+        int i = 1;
+        for (Object param : params) {
+            stmt.setObject(i, param);
+            i++;
+        }
+        ResultSet rs = db.executeQuery();
+        while (rs.next()) {
+            row = mapper.mapRow(rs);
+        }
+       db.close();
+        return row;
     }
 }
