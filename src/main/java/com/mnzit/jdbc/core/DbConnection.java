@@ -21,11 +21,8 @@ public class DbConnection {
     private PreparedStatement pstm = null;
 
     public void connect() throws Exception {
-        Class.forName("org.postgresql.Driver");
-        String url = "jdbc:postgresql://ec2-50-17-203-51.compute-1.amazonaws.com/d3hlap1pms3oe8?sslmode=require";
-        String user = "qvecbsrmncwsze";
-        String password = "2560942acfed92fdfa5adebb7b9a3ca519309ec8418d71ed81dc1f17fd3264eb";
-        conn = DriverManager.getConnection(url, user, password);
+        Class.forName(DbConstant.DB_DRIVER);
+        conn = DriverManager.getConnection(DbConstant.DB_URL, DbConstant.DB_USER, DbConstant.DB_PASSWORD);
     }
 
     public PreparedStatement init(String sql) throws SQLException {
@@ -33,8 +30,12 @@ public class DbConnection {
         return pstm;
     }
 
-    public ResultSet executeQuery() throws SQLException {
+    public ResultSet query() throws SQLException {
         return pstm.executeQuery();
+    }
+    
+     public int update() throws SQLException {
+        return pstm.executeUpdate();
     }
 
     public void close() throws SQLException {

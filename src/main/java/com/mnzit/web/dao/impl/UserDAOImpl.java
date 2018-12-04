@@ -37,6 +37,19 @@ public class UserDAOImpl implements UserDAO {
         return template.queryByObject("SELECT * from users where id=?", new Object[]{1}, new UserMapper());
     }
 
+    public int insert(User model) throws Exception {
+        String sql = "INSERT into users(username,password,email,status) VALUES(?,?,?,?)";
+        return template.update(sql, new Object[]{model.getUserName(),model.getPassword(),model.getEmail(),model.isStatus()});
+    }
+
+    public int delete(int id) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public int update(User model) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private class UserMapper implements RowMapper<User> {
 
         public User mapRow(ResultSet rs) throws SQLException {

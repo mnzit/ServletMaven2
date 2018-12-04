@@ -11,11 +11,9 @@ import java.sql.Date;
  *
  * @author Mnzit
  */
-public class User {
-    private int id;
+public class User extends Entity{
     private String userName,password,email;
     private boolean status;
-    private Date addedDate,modifiedDate;
 
     public User() {
     }
@@ -28,14 +26,6 @@ public class User {
         this.status = status;
         this.addedDate = addedDate;
         this.modifiedDate = modifiedDate;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getUserName() {
@@ -70,21 +60,4 @@ public class User {
         this.status = status;
     }
 
-    public Date getAddedDate() {
-        return addedDate;
-    }
-
-    public void setAddedDate(Date addedDate) {
-        this.addedDate = addedDate;
-    }
-
-    public Date getModifiedDate() {
-        return modifiedDate;
-    }
-
-    public void setModifiedDate(Date modifiedDate) {
-        this.modifiedDate = modifiedDate;
-    }
-
-    
 }

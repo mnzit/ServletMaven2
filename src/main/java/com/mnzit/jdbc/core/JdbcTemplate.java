@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,28 +26,38 @@ public class JdbcTemplate<T> {
         List<T> rows = new ArrayList<T>();
         db.connect();
         db.init(sql);
-        ResultSet rs = db.executeQuery();
+        ResultSet rs = db.query();
         while (rs.next()) {
             rows.add(mapper.mapRow(rs));
         }
         db.close();
         return rows;
     }
-
+    public void addParameters(PreparedStatement pstm, Object[] params)throws SQLException{
+        int i = 1;
+        for (Object param : params) {
+            pstm.setObject(i, param);
+            i++;
+        }
+    }
     public T queryByObject(String sql, Object[] params, RowMapper<T> mapper) throws Exception {
         T row = null;
         db.connect();
-        PreparedStatement stmt = db.init(sql);
-        int i = 1;
-        for (Object param : params) {
-            stmt.setObject(i, param);
-            i++;
-        }
-        ResultSet rs = db.executeQuery();
+        addParameters(db.init(sql), params);
+        ResultSet rs = db.query( );
         while (rs.next()) {
             row = mapper.mapRow(rs);
         }
        db.close();
         return row;
+    }
+    
+    public int update(String sql, Object...args)throws Exception{
+        db.connect();
+        addParameters(db.init(sql), args);
+        int result = db.update();
+        db.close();
+        return result;
+        
     }
 }

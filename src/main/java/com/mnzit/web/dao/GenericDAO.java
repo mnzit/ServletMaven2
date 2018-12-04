@@ -16,4 +16,10 @@ public interface GenericDAO<T> {
     List<T> getAll() throws Exception;
 
     T getById(int id) throws Exception;
+
+    int insert(T model) throws Exception;
+
+    int update(T model) throws Exception;
+
+    int delete(int id) throws Exception;
 }
