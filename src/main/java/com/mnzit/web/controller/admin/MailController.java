@@ -17,12 +17,19 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Mnzit
  */
-@WebServlet(name = "admin",urlPatterns = {"/admin","/admin/dashboard"})
-public class DashBoardController extends Controller{
+@WebServlet(name = "mail", urlPatterns = {"/mail/*"})
+public class MailController extends Controller{
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-      response.getWriter().println("<h1>WELCOME TO ADMIN AREA</h1>");
+        Mailer m = new Mailer();
+        int i = 1;
+        String from = "enquire@creators.institute";
+        String to = "mnzitshakya@gmail.com";
+        String host = "smtp.vianet.com.np";
+        String subject = "Test 2";
+        String content = "Content 2";
+        m.setFrom(from).setTo(to).setHost(host).setSubject(subject).setContent(content).send();
     }
     
 }

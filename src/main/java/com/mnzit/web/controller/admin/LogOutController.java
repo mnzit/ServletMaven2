@@ -24,5 +24,4 @@ public class LogOutController extends Controller{
      request.getSession().invalidate(); 
      response.sendRedirect(request.getContextPath()+"/home");
     }
-    
 }
