@@ -24,28 +24,28 @@ public class EventDAOImpl implements EventDAO {
     JdbcTemplate<Event> template = new JdbcTemplate<Event>();
 
     public List<Event> getAll() throws Exception {
-       return template.query("SELECT * FROM event", new EventMapper());
+        return template.query("SELECT * FROM event", new EventMapper());
     }
 
-    public Event getById(int id) throws Exception {
-       return template.queryByObject("SELECT * FROM event WHERE id=?", new Object[]{id}, new EventMapper());
+    public Event getByObject(String key, Object value) throws Exception {
+        return template.queryByObject("SELECT * FROM event WHERE " + key + "=?", new Object[]{value}, new EventMapper());
     }
 
     public int insert(Event model) throws Exception {
         String sql = "INSERT INTO event("
-                                        + "title,"
-                                        + "description,"
-                                        + "start_date,"
-                                        + "end_date,"
-                                        + "status,"
-                                        + "link) VALUES(?,?,?,?,?,?)";
+                + "title,"
+                + "description,"
+                + "start_date,"
+                + "end_date,"
+                + "status,"
+                + "link) VALUES(?,?,?,?,?,?)";
         return template.update(sql, new Object[]{
-                                                model.getTitle(),
-                                                model.getDescription(),
-                                                model.getStartDate(),
-                                                model.getEndDate(),
-                                                model.isStatus(),
-                                                LinkGenerator.toLink(model.getTitle())});
+            model.getTitle(),
+            model.getDescription(),
+            model.getStartDate(),
+            model.getEndDate(),
+            model.isStatus(),
+            LinkGenerator.toLink(model.getTitle())});
     }
 
     public int update(Event model) throws Exception {

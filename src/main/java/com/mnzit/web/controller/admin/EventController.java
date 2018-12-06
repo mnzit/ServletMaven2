@@ -60,9 +60,6 @@ public class EventController extends Controller {
 
         try {
             request.setAttribute("events", eventDAO.getAll());
-            for (Event e : eventDAO.getAll()) {
-                System.out.println(e.getId());
-            }
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

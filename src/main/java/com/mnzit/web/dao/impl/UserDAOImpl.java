@@ -33,8 +33,8 @@ public class UserDAOImpl implements UserDAO {
         return template.query("SELECT * from users", new UserMapper());
     }
 
-    public User getById(int id) throws Exception {
-        return template.queryByObject("SELECT * from users where id=?", new Object[]{1}, new UserMapper());
+    public User getByObject(String key, Object value) throws Exception {
+        return template.queryByObject("SELECT * from users where "+key+"=?", new Object[]{1}, new UserMapper());
     }
 
     public int insert(User model) throws Exception {

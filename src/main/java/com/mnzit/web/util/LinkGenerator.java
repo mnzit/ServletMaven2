@@ -5,13 +5,12 @@
  */
 package com.mnzit.web.util;
 
-import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.text.Normalizer;
 import java.text.Normalizer.Form;
 import java.util.Locale;
 import java.util.regex.Pattern;
-import static jdk.nashorn.tools.ShellFunctions.input;
+
 
 /**
  *
@@ -26,6 +25,6 @@ public class LinkGenerator {
         String nowhitespace = WHITESPACE.matcher(input).replaceAll("-");
         String normalized = Normalizer.normalize(nowhitespace, Form.NFD);
         String slug = NONLATIN.matcher(normalized).replaceAll("");
-        return InetAddress.getLocalHost().getCanonicalHostName() + "/form/" + slug.toLowerCase(Locale.ENGLISH);
+        return "/form/" + slug.toLowerCase(Locale.ENGLISH);
     }
 }

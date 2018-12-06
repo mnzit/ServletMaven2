@@ -10,16 +10,25 @@ package com.mnzit.web.entity;
  * @author Mnzit
  */
 public class Form extends Entity{
-    private String firstName, lastName, emailId, contactNo, eventId;
+    private int eventId;
+    private String firstName, lastName, emailId, contactNo;
 
     public Form() {
     }
 
-    public Form(String firstName, String lastName, String emailId, String contactNo, String eventId) {
+    public Form(int eventId, String firstName, String lastName, String emailId, String contactNo) {
+        this.eventId = eventId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.emailId = emailId;
         this.contactNo = contactNo;
+    }
+
+    public int getEventId() {
+        return eventId;
+    }
+
+    public void setEventId(int eventId) {
         this.eventId = eventId;
     }
 
@@ -55,12 +64,7 @@ public class Form extends Entity{
         this.contactNo = contactNo;
     }
 
-    public String getEventId() {
-        return eventId;
-    }
+   
 
-    public void setEventId(String eventId) {
-        this.eventId = eventId;
-    }
     
 }

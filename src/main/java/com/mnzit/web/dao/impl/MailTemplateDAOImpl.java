@@ -34,8 +34,8 @@ public class MailTemplateDAOImpl implements MailTemplateDAO {
         });
     }
 
-    public MailTemplate getById(int id) throws Exception {
-        return template.queryByObject("SELECT * FROM mail_template where id=?", new Object[]{id}, new RowMapper<MailTemplate>() {
+    public MailTemplate getByObject(String key,Object value) throws Exception {
+        return template.queryByObject("SELECT * FROM mail_template where "+key+"=?", new Object[]{value}, new RowMapper<MailTemplate>() {
             public MailTemplate mapRow(ResultSet rs) throws SQLException {
                 MailTemplate mailTemplate = new MailTemplate();
                 mailTemplate.setId(rs.getInt("id"));

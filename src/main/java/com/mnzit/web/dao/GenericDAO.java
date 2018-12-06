@@ -15,7 +15,7 @@ public interface GenericDAO<T> {
 
     List<T> getAll() throws Exception;
 
-    T getById(int id) throws Exception;
+    T getByObject(String key, Object value) throws Exception;
 
     int insert(T model) throws Exception;
 

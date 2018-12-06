@@ -33,31 +33,45 @@ public class JdbcTemplate<T> {
         db.close();
         return rows;
     }
-    public void addParameters(PreparedStatement pstm, Object[] params)throws SQLException{
+
+    public void addParameters(PreparedStatement pstm, Object[] params) throws SQLException {
         int i = 1;
         for (Object param : params) {
             pstm.setObject(i, param);
             i++;
         }
     }
+
     public T queryByObject(String sql, Object[] params, RowMapper<T> mapper) throws Exception {
         T row = null;
         db.connect();
         addParameters(db.init(sql), params);
-        ResultSet rs = db.query( );
+        ResultSet rs = db.query();
         while (rs.next()) {
             row = mapper.mapRow(rs);
         }
-       db.close();
+        db.close();
         return row;
     }
-    
-    public int update(String sql, Object...args)throws Exception{
+
+    public List<T> queryAllByObject(String sql, Object[] params, RowMapper<T> mapper) throws Exception {
+        List<T> rows = new ArrayList<T>();
+        db.connect();
+        addParameters(db.init(sql), params);
+        ResultSet rs = db.query();
+        while (rs.next()) {
+            rows.add(mapper.mapRow(rs));
+        }
+        db.close();
+        return rows;
+    }
+
+    public int update(String sql, Object... args) throws Exception {
         db.connect();
         addParameters(db.init(sql), args);
         int result = db.update();
         db.close();
         return result;
-        
+
     }
 }
