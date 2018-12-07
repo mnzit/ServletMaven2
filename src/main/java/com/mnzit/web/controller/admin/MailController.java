@@ -34,7 +34,6 @@ public class MailController extends Controller {
     MailTemplateDAO mailTemplateDAO = new MailTemplateDAOImpl();
     MailTemplate mailTemplate = new MailTemplate();
     FormDAO formDAO = new FormDAOImpl();
-//    Form form = new Form();
     Event event = new Event();
 
     @Override
@@ -43,6 +42,7 @@ public class MailController extends Controller {
         try {
             request.setAttribute("events", eventDAO.getAll());
             request.setAttribute("templates", mailTemplateDAO.getAll());
+           
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

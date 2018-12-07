@@ -50,6 +50,10 @@ public class UserDAOImpl implements UserDAO {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    public List<User> getAllByObject(String key, Object value) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private class UserMapper implements RowMapper<User> {
 
         public User mapRow(ResultSet rs) throws SQLException {

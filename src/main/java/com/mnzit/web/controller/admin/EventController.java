@@ -13,11 +13,7 @@ import com.mnzit.web.dao.impl.EventDAOImpl;
 import com.mnzit.web.dao.impl.MailTemplateDAOImpl;
 import com.mnzit.web.dao.impl.UserDAOImpl;
 import com.mnzit.web.entity.Event;
-import com.mnzit.web.entity.MailTemplate;
-import com.mnzit.web.entity.User;
-import com.mnzit.web.util.Parser;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Date;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -37,27 +33,6 @@ public class EventController extends Controller {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        try {
-//            MailTemplate template = templateDAO.getById(3);
-//
-//            String event = "Free JavaScript Workshop";
-//            String eventDate = "24 December, 2018";
-//            PrintWriter writer = response.getWriter();
-//            Parser  parser = new Parser();
-//            parser.add("EVENT",event);
-//
-//            for (User user : userDAO.getAll()) {
-//                writer.println("<div>");
-//                 writer.println("<h1>Email for "+user.getUserName()+"</h1>");
-//                 parser.add("Name",user.getUserName());
-//                 parser.add("EVENT_DATE",eventDate);
-//                writer.println(parser.parse(template.getDescription()));
-//                writer.println("</div>");
-//            }
-//        } catch (Exception e) {
-//            System.out.println(e.getMessage());
-//        }
-
         try {
             request.setAttribute("events", eventDAO.getAll());
         } catch (Exception e) {
@@ -81,7 +56,9 @@ public class EventController extends Controller {
                 event.setId(Integer.parseInt(request.getParameter("id")));
                 eventDAO.update(event);
             } else {
-                eventDAO.insert(event);
+                if(eventDAO.insert(event)==1){
+                     response.sendRedirect(request.getContextPath() + "/admin/events");  
+                }
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());

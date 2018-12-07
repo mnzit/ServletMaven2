@@ -16,6 +16,7 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -54,7 +55,10 @@ public class FormController extends Controller {
         form.setContactNo(request.getParameter("contact_no"));
         form.setEventId(event.getId());
         try {
-            formDAO.insert(form);
+            if (formDAO.insert(form) == 1) {
+                request.setAttribute("message", "<script>You are in!</script>");
+                response.sendRedirect(request.getContextPath() + "/home");  
+            }
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }

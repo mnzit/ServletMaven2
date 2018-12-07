@@ -64,4 +64,8 @@ public class MailTemplateDAOImpl implements MailTemplateDAO {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    public List<MailTemplate> getAllByObject(String key, Object value) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

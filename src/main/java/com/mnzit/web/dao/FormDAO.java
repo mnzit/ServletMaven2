@@ -13,5 +13,5 @@ import java.util.List;
  * @author Mnzit
  */
 public interface FormDAO extends GenericDAO<Form>{
-     List<Form> getAllByObject(String key, Object value) throws Exception;
+     
 }

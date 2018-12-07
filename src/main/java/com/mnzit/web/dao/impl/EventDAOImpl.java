@@ -56,6 +56,10 @@ public class EventDAOImpl implements EventDAO {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    public List<Event> getAllByObject(String key, Object value) throws Exception {
+         return template.queryAllByObject("SELECT * FROM event WHERE " + key + "=?", new Object[]{value}, new EventMapper());
+    }
+
     public class EventMapper implements RowMapper<Event> {
 
         public Event mapRow(ResultSet rs) throws SQLException {
@@ -66,6 +70,7 @@ public class EventDAOImpl implements EventDAO {
             event.setStartDate(rs.getDate("start_date"));
             event.setEndDate(rs.getDate("end_date"));
             event.setStatus(rs.getBoolean("status"));
+            event.setLink(rs.getString("link"));
             return event;
         }
 

@@ -35,6 +35,7 @@
             <th>Start date</th>
             <th>End date</th>
             <th>Status</th>
+            <th>Link<th>
         </tr>
     </thead>
     <tbody>
@@ -45,6 +46,7 @@
                 <td>${event.startDate}</td>
                 <td>${event.endDate}</td>
                 <td>${event.status}</td>
+                <td><a href="${SITE_URL}${event.link}" target="_blank">link</a></td>
                 <td>
                     <a href="${SITE_URL}/admin/event/edit?id=${event.id}" class="btn btn-success btn-xs">
                         <i class="fas fa-edit"></i>

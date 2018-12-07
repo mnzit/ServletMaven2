@@ -22,4 +22,6 @@ public interface GenericDAO<T> {
     int update(T model) throws Exception;
 
     int delete(int id) throws Exception;
+    
+    List<T> getAllByObject(String key, Object value) throws Exception;
 }

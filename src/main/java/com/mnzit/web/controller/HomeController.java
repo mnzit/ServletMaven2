@@ -25,7 +25,6 @@ public class HomeController extends Controller {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("name", "MANJIT SHAKYA LOGIN INTERFACE");
         view("home/index", request, response);
     }
 
@@ -37,7 +36,7 @@ public class HomeController extends Controller {
             User user = userDAO.login(username, password);
             if (user != null) {
                 request.getSession(true).setAttribute("user", user);
-                response.sendRedirect(request.getContextPath()+"/admin");
+                    response.sendRedirect(request.getContextPath()+"/admin");
             }else{
                 response.sendRedirect(request.getContextPath()+"/home?error");
             }

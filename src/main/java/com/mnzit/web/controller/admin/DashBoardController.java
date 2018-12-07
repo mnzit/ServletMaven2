@@ -22,7 +22,7 @@ public class DashBoardController extends Controller{
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-      response.getWriter().println("<h1>WELCOME TO ADMIN AREA</h1>");
+       view("admin/dashboard/index", request, response);
     }
     
 }
