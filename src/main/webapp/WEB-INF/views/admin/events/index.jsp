@@ -27,6 +27,7 @@
     <button type="submit" class="btn btn-success">Save</button>
     <a href="${SITE_URL}/admin/event" class="btn btn-danger">Back</a>
 </form>
+<br/>
 <table class="table">
     <thead>
         <tr>
