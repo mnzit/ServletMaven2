@@ -22,7 +22,7 @@
     <button type="submit" class="btn btn-success">Send Email</button>
     <a href="${SITE_URL}/admin/mail" class="btn btn-danger">Back</a>
 </form>
-
+<br/>
 <table class="table">
     <thead>
         <tr>
