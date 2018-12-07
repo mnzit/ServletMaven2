@@ -18,6 +18,8 @@ import com.mnzit.web.entity.MailTemplate;
 import com.mnzit.web.entity.Mailer;
 import com.mnzit.web.util.Parser;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -38,11 +40,14 @@ public class MailController extends Controller {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         try {
             request.setAttribute("events", eventDAO.getAll());
             request.setAttribute("templates", mailTemplateDAO.getAll());
-           
+            Map<String,Integer> map = new HashMap<String,Integer>();  
+            for(Event event:eventDAO.getAll()){
+                map.put(event.getTitle(),formDAO.getAllByObject("event_id", event.getId()).size());
+            }
+            request.setAttribute("registered", map);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
