@@ -62,7 +62,7 @@ public class MailController extends Controller {
             mailTemplate = mailTemplateDAO.getByObject("id", templateId);
             event = eventDAO.getByObject("id", eventId);
             Mailer m = new Mailer();
-            String from = "enquire@creators.institute";
+            String from = "mnzit@manjitshakya.com.np";
             String host = "smtp.vianet.com.np";
 
             for (Form form : formDAO.getAllByObject("event_id", eventId)) {
