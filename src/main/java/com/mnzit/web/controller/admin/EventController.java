@@ -34,7 +34,15 @@ public class EventController extends Controller {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            request.setAttribute("events", eventDAO.getAll());
+            String uri = request.getRequestURI().toLowerCase();
+            if (uri.contains("delete")) {
+                int id = Integer.parseInt(request.getParameter("id"));
+                System.out.println(id);
+                eventDAO.delete(id);
+            }else{
+                 request.setAttribute("events", eventDAO.getAll());
+            }
+           
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -56,8 +64,8 @@ public class EventController extends Controller {
                 event.setId(Integer.parseInt(request.getParameter("id")));
                 eventDAO.update(event);
             } else {
-                if(eventDAO.insert(event)==1){
-                     response.sendRedirect(request.getContextPath() + "/admin/events");  
+                if (eventDAO.insert(event) == 1) {
+                    response.sendRedirect(request.getContextPath() + "/admin/events");
                 }
             }
         } catch (Exception e) {

@@ -53,7 +53,7 @@ public class EventDAOImpl implements EventDAO {
     }
 
     public int delete(int id) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       return template.update("DELETE FROM event WHERE id=?", new Object[]{id});
     }
 
     public List<Event> getAllByObject(String key, Object value) throws Exception {
